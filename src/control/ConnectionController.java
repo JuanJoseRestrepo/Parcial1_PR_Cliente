@@ -52,7 +52,6 @@ public class ConnectionController implements TCPConnection.OnConnectionListener 
 					
 					()->{
 						GameWindow window = new GameWindow(idGlobal);
-						window.getIdClient().setText(idGlobal);
 						window.show();
 						view.close();
 					}

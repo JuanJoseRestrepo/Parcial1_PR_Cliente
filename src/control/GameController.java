@@ -283,20 +283,29 @@ public class GameController implements OnMessageListener {
 				() -> {
 					Gson gson = new Gson();
 					Generic msjObj = gson.fromJson(message,Generic.class);
-					System.out.println(msjObj.getType());
-					switch(msjObj.getType()) {
 					
+					if(msjObj == null) {
+						
+						view.close();
+						connection.closeSocket();
+						System.exit(0);
+						
+					}else {
+					
+					switch(msjObj.getType()) {
+
+
 					case "NewConnection":
 						NewConnection nuevaConexion = gson.fromJson(message, NewConnection.class);
 
 						if (nuevaConexion.getBody().isEmpty()) {
 
 							conectados.add(nuevaConexion);
-							System.out.println(conectados.size());
+							System.out.println(conectados.size() + "asdasdasdsadasd");
 							
 						} else {
-							//reloadStage();
-							System.out.println("EHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+							
+
 							view.closeWindow();
 							connection.closeSocket();		
 						}
@@ -310,7 +319,6 @@ public class GameController implements OnMessageListener {
 						
 							if(numero == myDevilPoint) {
 							
-								System.out.println("sadasdasd");
 								UserDisconnect usuarioDesconectado = new UserDisconnect(id);
 								String mensajePrincipal = gson.toJson(usuarioDesconectado);
 								connection.getEmisor().setMessage(mensajePrincipal);
@@ -354,15 +362,22 @@ public class GameController implements OnMessageListener {
 						view.getBoton8().setDisable(false);
 						view.getBoton9().setDisable(false);
 						
-					
+						int devilPoint = (int) (Math.random() * 9) + 1;
+						setMyDevilPoint(devilPoint);
 						
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Acabaste de ganar" + "  " + mensajeDesconexion.getId());
+						alert.setHeaderText("Acabas de ganar la partida, por favor juega mas");
+						alert.setContentText("¡Yikes!");
+						alert.showAndWait();
+						
+						System.out.println(myDevilPoint + "El nuevo xd");
 						System.out.println("ganaste");
 						
 					break;
-				
 						
 					}
-
+					}
 				}
 
 		);
@@ -386,6 +401,15 @@ public class GameController implements OnMessageListener {
 				);	
 		
 	}
+
+	public int getMyDevilPoint() {
+		return myDevilPoint;
+	}
+
+	public void setMyDevilPoint(int myDevilPoint) {
+		this.myDevilPoint = myDevilPoint;
+	}
+	
 	
 
 }

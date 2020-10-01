@@ -34,7 +34,7 @@ public class TCPConnection extends Thread {
 	private OnConnectionListener connectionListener;
 	
 	private  TCPConnection() {
-	
+	setDaemon(true);
 	}
 	
 	public static synchronized TCPConnection getInstance() {
