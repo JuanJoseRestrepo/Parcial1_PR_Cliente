@@ -366,7 +366,7 @@ public class GameController implements OnMessageListener {
 						setMyDevilPoint(devilPoint);
 						
 						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Acabaste de ganar" + "  " + mensajeDesconexion.getId());
+						alert.setTitle("Acabaste de ganar");
 						alert.setHeaderText("Acabas de ganar la partida, por favor juega mas");
 						alert.setContentText("¡Yikes!");
 						alert.showAndWait();
